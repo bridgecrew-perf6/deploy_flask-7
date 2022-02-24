@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/my_style1.css') }}">
+    <title>Recipes</title>
+</head>
+
+<body>
+    <div class="row1">
+        <h1>Sasquatch Websighting</h1>
+        <h2>{{user.first_name}} {{user.last_name}}</h2>
+    </div>
+    <div class="row2">
+        <a href="/new/sighting">Report a Sighting</a> <br>
+        <a href="/">logout</a>
+    </div>
+    <h2>Reported Sightings</h2>
+        
+        {% for sighting in all_sightings %}
+            <div class="reports">
+                <div>
+                    <p>Skeptics</p><br>
+                    <p>{{sighting.num_skeptics}}</p>
+                </div>
+                <div class="left">
+                    {{sighting.location}} - {{sighting.siting_date}} <br>
+                    Reported by: {{sighting.owner_first_name}} {{sighting.owner_last_name}}
+                </div>
+                <div class="right">
+                    {% if sighting.user_id == user.id %}
+                    <a href="/edit/{{sighting.id}}">Edit</a>
+                    <a href="/delete_sighting/{{sighting.id}}">Delete</a>
+                    {% else %}
+                    <a href="/show/{{sighting.id}}">View</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+
+
+    
+
+
+</body>
+
+</html>

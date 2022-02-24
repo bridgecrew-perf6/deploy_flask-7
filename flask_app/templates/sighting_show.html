@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/my_style1.css') }}">
+    <title>Recipes</title>
+</head>
+
+<body>
+    <div class="row1">
+        <h1>Sasquatch Websighting</h1>
+        <h2>{{user.first_name}} {{user.last_name}}</h2>
+    </div>
+    <div class="row2">
+        <a href="/dashboard">Dashboard</a> <br>
+        <a href="/">logout</a>
+    </div>
+
+    <h2>{{sighting.location}} on {{sighting.siting_date}}</h2>
+    <br>
+
+
+    <div class="container_bottom">
+        <div>
+            <p>What Happened:</p>
+            <br>
+            <p>{{sighting.happened}}</p>
+            <br>
+            <p># of Sasquatches: {{sighting.sasquatches}}</p>
+            
+            <p>Reported By: {{reporter.first_name}} {{reporter.last_name}}</p>
+        </div>
+        <div>
+            <p>Skeptics:</p><br>
+            {% for skeptic in sighting.skeptics %}
+                {% if skeptic.first_name %}
+                {{skeptic.first_name}}  {{skeptic.last_name}} <br>
+                {% endif %}
+            {% endfor %}
+
+            {% if check %}
+            <a href="/dislink_believe/{{sighting.id}}">I am skeptical</a>
+            {% else %}
+                <a href="/link_believe/{{sighting.id}}">Believe it</a>
+            {% endif %}
+        </div>
+    </div>
+
+
+</body>
+
+</html>

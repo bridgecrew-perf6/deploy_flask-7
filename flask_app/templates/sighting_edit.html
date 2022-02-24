@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/my_style2.css') }}">
+    <title>Recipes</title>
+</head>
+
+<body>
+    <div class="row1">
+        <h1>Sasquatch Websighting</h1>
+        <h2>{{user.first_name}} {{user.last_name}}</h2>
+    </div>
+    <div class="row2">
+        <a href="/dashboard">Dashboard</a> <br>
+        <a href="/">logout</a>
+    </div>
+    {% with messages = get_flashed_messages(category_filter=['sighting_error']) %}
+            <div class="error">
+                {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p> 
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+    <form action="/sighting/editing/{{sighting.id}}" method="post">
+        <label for="location">Location:</label>
+        <input type="text" name="location" value="{{sighting.location}}"> <br>
+        <label for="happened">What Happened:</label><br>
+        <textarea name="happened" rows="4" cols="50">{{sighting.happened}}</textarea> <br>
+        <label for="siting_date">Date of Siting:</label>
+        <input type="date" name="siting_date" value ={{sighting.siting_date}}> <br>
+        <label for="sasquatches"># of Saquatches</label> <br>
+        <input type="number" name="sasquatches" step="1" min ='0' name="time" value={{sighting.sasquatches}}><br>
+        
+        
+        <button>Report</button>
+
+    </form>
+
+    </form>
+
+
+</body>
+
+</html>
